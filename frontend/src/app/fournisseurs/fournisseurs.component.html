@@ -1,0 +1,42 @@
+<div>
+    <h2>Fournisseurs</h2>
+  
+    <div>
+      <h3 *ngIf="selectedFournisseur">Edit Fournisseur</h3>
+      <h3 *ngIf="!selectedFournisseur">New Fournisseur</h3>
+      <form (ngSubmit)="saveFournisseur()">
+        <div>
+          <label>Nom:</label>
+          <input [(ngModel)]="formNom" name="nom" />
+        </div>
+        <div>
+          <label>Prénom:</label>
+          <input [(ngModel)]="formPrenom" name="prenom" />
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fournisseur of fournisseurs">
+          <td>{{ fournisseur.id_Four }}</td>
+          <td>{{ fournisseur.nom }}</td>
+          <td>{{ fournisseur.prenom }}</td>
+          <td>
+            <button (click)="selectFournisseur(fournisseur)" class="btn btn-sm btn-warning">Edit</button>
+            <button (click)="deleteFournisseur(fournisseur.id_Four)" class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

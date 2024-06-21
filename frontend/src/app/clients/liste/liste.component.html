@@ -1,0 +1,49 @@
+<div>
+  <h2>Clients</h2>
+  
+  <!-- Search Clients -->
+  <div>
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search clients">
+    <button (click)="searchClients()">Search</button>
+  </div>
+
+  <!-- Add New Client -->
+  <form (ngSubmit)="createClient()">
+    <input [(ngModel)]="newClient.nom" name="nom" placeholder="Nom" required />
+    <input [(ngModel)]="newClient.prenom" name="prenom" placeholder="Prenom" required />
+    <button type="submit">Add Client</button>
+  </form>
+
+  <!-- Client List -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.idClient }}</td>
+        <td>{{ client.nom }}</td>
+        <td>{{ client.prenom }}</td>
+        <td>
+          <button (click)="editClient(client)">Edit</button>
+          <button (click)="deleteClient(client.idClient)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Edit Client -->
+  <div *ngIf="editMode">
+    <h3>Edit Client</h3>
+    <form (ngSubmit)="updateClient()">
+      <input [(ngModel)]="selectedClient.nom" name="nom" placeholder="Nom" required />
+      <input [(ngModel)]="selectedClient.prenom" name="prenom" placeholder="Prenom" required />
+      <button type="submit">Update Client</button>
+    </form>
+  </div>
+</div>

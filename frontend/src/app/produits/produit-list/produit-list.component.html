@@ -1,0 +1,35 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of produits">
+        <td>{{ produit.idProd }}</td>
+        <td>{{ produit.nomProd }}</td>
+        <td>{{ produit.quantityStock }}</td>
+        <td>{{ produit.prix }}</td>
+        <td>
+          <button (click)="updateProduit(produit)" class="btn btn-sm btn-warning">Edit</button>
+          <button (click)="deleteProduit(produit.idProd)" class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div>
+    <h2>Add New Product</h2>
+    <form (ngSubmit)="addProduit()">
+      <input type="text" placeholder="Nom" [(ngModel)]="newProduit.nomProd" name="nomProd" required>
+      <input type="number" placeholder="Quantité" [(ngModel)]="newProduit.quantityStock" name="quantiteStock" required>
+      <input type="number" placeholder="Prix" [(ngModel)]="newProduit.prix" name="prix" required>
+      <input type="number" placeholder="Fournisseur Id" [(ngModel)]="newProduit.fournisseurId" name="fournisseurId" required>
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+  

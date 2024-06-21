@@ -1,0 +1,30 @@
+<div>
+    <h2>Produits</h2>
+    <form (ngSubmit)="createProduit()">
+      <input [(ngModel)]="newProduit.nomProd" name="nomProd" placeholder="Name" required />
+      <input [(ngModel)]="newProduit.prix" name="prix" type="number" placeholder="Price" required />
+      <input [(ngModel)]="newProduit.quantityStock" name="quantityStock" type="number" placeholder="Quantity Stock" required />
+      <input [(ngModel)]="newProduit.fournisseurId" name="fournisseurId" type="number" placeholder="Fournisseur ID" required />
+      <button type="submit">Add Produit</button>
+    </form>
+  
+    <ul>
+      <li *ngFor="let produit of produits">
+        {{ produit.idProd }} - {{ produit.nomProd }} - {{ produit.prix }} - {{ produit.quantityStock }} - {{ produit.fournisseurId }}
+        <button (click)="deleteProduit(produit.idProd)">Delete</button>
+        <button (click)="editProduit(produit)">Edit</button>
+      </li>
+    </ul>
+  
+    <div *ngIf="editMode">
+      <h3>Edit Produit</h3>
+      <form (ngSubmit)="updateProduit()">
+        <input [(ngModel)]="selectedProduit.nomProd" name="nomProd" placeholder="Name" required />
+        <input [(ngModel)]="selectedProduit.prix" name="prix" type="number" placeholder="Price" required />
+        <input [(ngModel)]="selectedProduit.quantityStock" name="quantityStock" type="number" placeholder="Quantity Stock" required />
+        <input [(ngModel)]="selectedProduit.fournisseurId" name="fournisseurId" type="number" placeholder="Fournisseur ID" required />
+        <button type="submit">Update Produit</button>
+      </form>
+    </div>
+  </div>
+  

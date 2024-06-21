@@ -1,0 +1,79 @@
+<div>
+  <h2>Commandes</h2>
+
+  <div>
+    <h3 *ngIf="selectedCommande">Edit Commande</h3>
+    <h3 *ngIf="!selectedCommande">New Commande</h3>
+    <form (ngSubmit)="saveCommande()">
+      <div>
+        <label>Client:</label>
+        <select [(ngModel)]="formClientId" name="clientId">
+          <option *ngFor="let client of clients" [value]="client.idClient">{{ client.nom }} {{ client.prenom }}</option>
+        </select>
+      </div>
+      <div>
+        <label>Date:</label>
+        <input [(ngModel)]="formDateCmd" name="dateCmd" type="date" />
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+  <div *ngIf="selectedCommande">
+    <h3>Lignes Commande</h3>
+    <form (ngSubmit)="addLigneCmd()">
+      <div>
+        <label>Produit:</label>
+        <select [(ngModel)]="newLigneCmd.produitId" name="produitId">
+          <option *ngFor="let produit of produit" [value]="produit.idProd">{{ produit.nomProd }}</option>
+        </select>
+      </div>
+      <div>
+        <label>Quantity:</label>
+        <input [(ngModel)]="newLigneCmd.quantity" name="quantity" type="number" />
+      </div>
+      <button type="submit">Add Ligne Commande</button>
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produit</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ligneCmd of lignesCmd">
+          <td>{{ ligneCmd.produitId }}</td>
+          <td>{{ ligneCmd.quantity }}</td>
+          <td>
+            <button (click)="deleteLigneCmd(ligneCmd.idLigneCmd)" class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Client</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let commande of commandes">
+        <td>{{ commande.idCmd }}</td>
+        <td>{{ commande.clientId }}</td>
+        <td>{{ commande.dateCmd }}</td>
+        <td>
+          <button (click)="selectCommande(commande)" class="btn btn-sm btn-warning">Edit</button>
+          <button (click)="deleteCommande(commande.idCmd)" class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

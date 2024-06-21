@@ -1,0 +1,9 @@
+/* Optional: Add some styles for the component */
+.delete-img {
+    cursor: pointer;
+    background: none;
+    border: none;
+    height: 20px;
+    width: 20px;
+  }
+  
